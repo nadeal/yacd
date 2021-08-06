@@ -90,14 +90,15 @@ extern int mremap_encrypted(caddr_t addr, size_t len,
 /********************************************************************************/
 
 - (void)refreshDataSource {
-    
+    //void *lib = dlopen("/System/Library/Frameworks/MobileCoreServices.framework/MobileCoreServices", RTLD_LAZY);
     NSError *err = nil;
     self.processDictionary = [[PIDManager sharedManager] runningProcessesWithError:&err];
     if (err) {
         NSLog(@"%@", err);
     }
 
-    id<LSApplicationWorkspaceProtocol> LSApplicationWorkspace = NSClassFromString(@"LSApplicationWorkspace");
+//    id<LSApplicationWorkspaceProtocol> LSApplicationWorkspace = NSClassFromString(@"LSApplicationWorkspace");
+    Class LSApplicationWorkspace = NSClassFromString(@"LSApplicationWorkspace");
     self.installedApplications  = [[LSApplicationWorkspace defaultWorkspace] allApplications];
     self.filteredInstalledApplications = self.installedApplications;
     [self.tableView reloadData];
